@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=rental
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3307:3306'
+    volumes:
+      - rental_db:/var/lib/mysql
+
+  service:
+    depends_on:
+      - mysqldb
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/rental?useSSL=false",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "root",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update"
+      }'
+    volumes:
+      - .data:/root/.data
+    stdin_open: true
+    tty: true
+
+  frontend:
+    depends_on:
+      - service
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+    stdin_open: true
+    tty: true
+
+volumes:
+  rental_db:
