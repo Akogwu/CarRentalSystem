@@ -1,9 +1,9 @@
 spring:
   datasource:
     #    url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental}
-    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
+    url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental?useSSL=false}
     username: ${SPRINGDATASOURCEUSERNAME:root}
-    password: ${SPRINGDATASOURCEPASSWORD:krs1krs1}
+    password: ${SPRINGDATASOURCEPASSWORD:@Akosco91}
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       maximumPoolSize: 10
@@ -19,4 +19,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 debug: false
-
+server:
+  port: 8082

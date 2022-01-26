@@ -1,14 +1,9 @@
 import './App.css';
+import Home from "./client";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Car Rental
-        </p>
-      </header>
-    </div>
+    <Home/>
   );
 }
 
