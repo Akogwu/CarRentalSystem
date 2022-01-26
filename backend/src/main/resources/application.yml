@@ -1,22 +1,25 @@
 spring:
   datasource:
-    #    url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental}
-    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
+    password: ${SPRINGDATASOURCEPASSWORD:root}
     username: ${SPRINGDATASOURCEUSERNAME:root}
-    password: ${SPRINGDATASOURCEPASSWORD:krs1krs1}
+    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       maximumPoolSize: 10
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+  main:
+    banner-mode: off
 
 debug: false
 
+
+jwt.secret: ${CAR_RENTAL_SECRET_KEY:x7D*6]]s#j4ZI{M"V"4+[X%KbTW+Y3GI^KJb+E!n8^<nRbCboV'68m<{H+nGYXJ}
