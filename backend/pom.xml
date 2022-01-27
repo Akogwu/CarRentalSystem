@@ -42,8 +42,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-<<<<<<< HEAD
-=======
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
@@ -57,7 +55,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
->>>>>>> 5f2575d0d5855ce6887dc8dfc552127d0f9e177a
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
