@@ -8,30 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
-@Setter @Getter
-@NoArgsConstructor
-public class Customer {
+
+public class Employee {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
     @Column(nullable = false)
+    private string empID;
+
+    @NotNull
+    @Column(nullable = false)
     private string name;
-
-    @NotNull
-    @Column(nullable = false)
-    private string email;
-
-    @NotNull
-    @Column(nullable = false)
-    public Address address;
-
-
-    @NotNull
-    @Column(nullable = false)
-    public string driverlicenseNo;
-
 
 }

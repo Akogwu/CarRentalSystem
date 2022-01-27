@@ -11,27 +11,21 @@ import javax.persistence.Id;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class Customer {
+public class Address {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
     @Column(nullable = false)
-    private string name;
+    private string street;
 
     @NotNull
     @Column(nullable = false)
-    private string email;
+    private string city;
 
     @NotNull
     @Column(nullable = false)
-    public Address address;
-
-
-    @NotNull
-    @Column(nullable = false)
-    public string driverlicenseNo;
-
-
+    private string zip;
 }
