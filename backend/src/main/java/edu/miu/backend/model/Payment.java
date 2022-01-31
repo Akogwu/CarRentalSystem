@@ -11,27 +11,31 @@ import javax.persistence.Id;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class Customer {
+public class Payment {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
     @Column(nullable = false)
-    private string name;
+    private string paymentID;
 
     @NotNull
     @Column(nullable = false)
-    private string email;
+    private date date;
 
     @NotNull
     @Column(nullable = false)
-    public Address address;
-
+    private double amount;
 
     @NotNull
     @Column(nullable = false)
-    public string driverlicenseNo;
+    private boolean status;
 
+    @NotNull
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 
 }

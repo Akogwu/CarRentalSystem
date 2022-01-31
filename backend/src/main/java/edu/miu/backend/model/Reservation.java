@@ -11,27 +11,24 @@ import javax.persistence.Id;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class Customer {
+
+public class Reservation {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
     @Column(nullable = false)
-    private string name;
+    private date pickupDate;
 
     @NotNull
     @Column(nullable = false)
-    private string email;
-
-    @NotNull
-    @Column(nullable = false)
-    public Address address;
+    private date returndate;
 
 
     @NotNull
     @Column(nullable = false)
-    public string driverlicenseNo;
-
-
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

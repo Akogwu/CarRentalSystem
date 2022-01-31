@@ -11,27 +11,25 @@ import javax.persistence.Id;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class Customer {
+public class Car {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotNull
     @Column(nullable = false)
-    private string name;
+    private string regNo;
 
     @NotNull
     @Column(nullable = false)
-    private string email;
+    private string model;
 
     @NotNull
     @Column(nullable = false)
-    public Address address;
-
+    private string milleage;
 
     @NotNull
     @Column(nullable = false)
-    public string driverlicenseNo;
-
-
+    private boolean status;
 }
