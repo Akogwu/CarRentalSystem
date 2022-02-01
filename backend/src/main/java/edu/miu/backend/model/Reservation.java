@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Setter @Getter
@@ -20,11 +20,11 @@ public class Reservation {
 
     @NotNull
     @Column(nullable = false)
-    private date pickupDate;
+    private LocalDate pickupDate;
 
     @NotNull
     @Column(nullable = false)
-    private date returndate;
+    private LocalDate returndate;
 
 
     @NotNull

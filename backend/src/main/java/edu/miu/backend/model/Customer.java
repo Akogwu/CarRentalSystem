@@ -20,11 +20,11 @@ public class Customer {
 
     @NotNull
     @Column(nullable = false)
-    private string name;
+    private String name;
 
     @NotNull
     @Column(nullable = false)
-    private string email;
+    private String email;
 
     @NotNull
     @Column(nullable = false)
@@ -33,7 +33,7 @@ public class Customer {
 
     @NotNull
     @Column(nullable = false)
-    public string driverlicenseNo;
+    public String driverlicenseNo;
 
 
 }

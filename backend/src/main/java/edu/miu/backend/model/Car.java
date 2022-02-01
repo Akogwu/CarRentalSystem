@@ -21,15 +21,15 @@ public class Car {
 
     @NotNull
     @Column(nullable = false)
-    private string regNo;
+    private String regNo;
 
     @NotNull
     @Column(nullable = false)
-    private string model;
+    private String model;
 
     @NotNull
     @Column(nullable = false)
-    private string milleage;
+    private String milleage;
 
     @NotNull
     @Column(nullable = false)

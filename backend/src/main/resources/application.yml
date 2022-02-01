@@ -1,7 +1,7 @@
 spring:
   datasource:
-    #    url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental}
-    password: ${SPRINGDATASOURCEPASSWORD:root}
+    # url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental}
+    password: ${SPRINGDATASOURCEPASSWORD:}
     username: ${SPRINGDATASOURCEUSERNAME:root}
     url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
     driverClassName: com.mysql.cj.jdbc.Driver
