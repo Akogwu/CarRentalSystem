@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Setter @Getter
@@ -19,15 +21,15 @@ public class Car {
 
     @NotNull
     @Column(nullable = false)
-    private string regNo;
+    private String regNo;
 
     @NotNull
     @Column(nullable = false)
-    private string model;
+    private String model;
 
     @NotNull
     @Column(nullable = false)
-    private string milleage;
+    private String milleage;
 
     @NotNull
     @Column(nullable = false)
