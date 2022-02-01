@@ -1,5 +1,6 @@
 package edu.miu.backend.seed;
 
+import edu.miu.backend.exception.CustomException;
 import edu.miu.backend.model.Role;
 import edu.miu.backend.model.User;
 import edu.miu.backend.services.UserService;
@@ -37,7 +38,11 @@ public class SeedData {
             user.setFirstName(role.toString().toUpperCase());
             user.setEmail(role.toString().toLowerCase() + "@mail.com");
 
-            userService.createUser(user);
+            try {
+                userService.createUser(user);
+            } catch (CustomException e) {
+                e.printStackTrace();
+            }
         });
     }
 
