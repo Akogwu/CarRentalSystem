@@ -3,8 +3,10 @@ package edu.miu.backend.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -12,30 +14,29 @@ import java.time.LocalDate;
 @Setter @Getter
 @NoArgsConstructor
 public class Payment {
-
     @Id
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String paymentID;
 
     @NotNull
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @NotNull
     @Column(nullable = false)
-    private double amount;
+    private Double amount;
 
     @NotNull
     @Column(nullable = false)
-    private boolean status;
+    private Boolean status;
 
     @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
-
 }

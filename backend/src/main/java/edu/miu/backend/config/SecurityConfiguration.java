@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         String[] allowedNonAuthUrls = new String[]{
                 "/",
                 "/users",
+                "/brands",
                 "/auth/**",
                 "/users/**",
                 "/swagger-ui/**",
