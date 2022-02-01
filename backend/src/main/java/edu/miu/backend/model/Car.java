@@ -1,23 +1,20 @@
 package edu.miu.backend.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Setter @Getter
+@Getter
+@Setter
 @NoArgsConstructor
 public class Car {
-
     @Id
     @GeneratedValue
-    private Long id;
+    private Long carId;
 
     @NotNull
     @Column(nullable = false)
@@ -25,13 +22,30 @@ public class Car {
 
     @NotNull
     @Column(nullable = false)
-    private String model;
+    private String year;
 
     @NotNull
     @Column(nullable = false)
-    private String milleage;
+    private String name;
 
     @NotNull
     @Column(nullable = false)
-    private boolean status;
+    private CarModel model;
+
+    @NotNull
+    @Column(nullable = false)
+    private boolean status = false;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "brandId", nullable = false)
+    private CarBrand brand;
+
+    @Override
+    public String toString() {
+        return "Car {" + "year = '" + year + '\'' +
+                ", name = '" + name + '\'' +
+                ", model = '" + model + '\'' +
+                ", brand = '" + brand.getName() + '}';
+    }
 }

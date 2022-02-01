@@ -4,36 +4,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Setter @Getter
+@Setter
+@Getter
 @NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue
     private Long id;
 
-    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String email;
 
     @NotNull
-    @Column(nullable = false)
+    @OneToOne
     public Address address;
 
-
-    @NotNull
+    @NotBlank
     @Column(nullable = false)
-    public String driverlicenseNo;
-
-
+    public String driverLicenseNo;
 }

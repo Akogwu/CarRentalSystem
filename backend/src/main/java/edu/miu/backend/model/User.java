@@ -40,7 +40,6 @@ public class User {
     @NotEmpty(message = "username is required")
     private String username;
 
-    @NotBlank
     private boolean loggedIn;
 
     @NotNull
@@ -52,8 +51,7 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
+        if (!(o instanceof User user)) return false;
         return Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password);
     }
