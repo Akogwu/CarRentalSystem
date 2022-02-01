@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Setter @Getter
@@ -19,13 +21,13 @@ public class Address {
 
     @NotNull
     @Column(nullable = false)
-    private string street;
+    private String street;
 
     @NotNull
     @Column(nullable = false)
-    private string city;
+    private String city;
 
     @NotNull
     @Column(nullable = false)
-    private string zip;
+    private String zip;
 }
