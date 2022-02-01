@@ -26,8 +26,6 @@ debug: false
 server:
   port: 8082
 
-
-
   main:
     banner-mode: off
 jwt.secret: ${CAR_RENTAL_SECRET_KEY:x7D*6]]s#j4ZI{M"V"4+[X%KbTW+Y3GI^KJb+E!n8^<nRbCboV'68m<{H+nGYXJ}

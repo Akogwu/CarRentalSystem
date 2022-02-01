@@ -1,19 +1,27 @@
 import React, {Fragment, useRef, useState} from 'react';
-import {Button, Col, DatePicker, Drawer, Form, Input, notification, Row, Select, Space} from "antd";
+import {Button, Col, Form, Input, notification, Row} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {loginPending,loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
+import {Alert, Spinner} from "react-bootstrap";
+
 const LoginForm = () => {
     const formRef = useRef(null);
     const [sending,setSending] = useState(false);
+    const dispatch = useDispatch();
+    const {isLoading,isAuth,error} = useSelector(state => state.login);
+
     const dateFormat = 'YYYY-MM-DD';
     const onFinish = (values: any) => {
-        setSending(true);
-        const data = {
-            "patientNumber": values.patientNumber,
-            "isAnOutPatient": values.isAnOutPatient,
-            "fullNames": values.fullNames,
-            "emailAddress": values.emailAddress,
-            "contactPhoneNumber": values.contactPhoneNumber,
-            "dateOfBirth": values.dateOfBirth
-        }
+        // setSending(true);
+        // const data = {
+        //     "patientNumber": values.patientNumber,
+        //     "isAnOutPatient": values.isAnOutPatient,
+        //     "fullNames": values.fullNames,
+        //     "emailAddress": values.emailAddress,
+        //     "contactPhoneNumber": values.contactPhoneNumber,
+        //     "dateOfBirth": values.dateOfBirth
+        // }
+        dispatch(loginPending())
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -48,9 +56,14 @@ const LoginForm = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Button type="primary" htmlType="submit"  disabled={sending}>
-                        {sending? 'Please wait ... ': 'Submit'}
+                    <Button type="primary" htmlType="submit"  disabled={isLoading} loading={isLoading}>
+                        {isLoading? 'Please wait ... ': 'Submit'}
                     </Button>
+                </Row>
+                <Row style={{paddingTop:12, width:'100%'}}>
+                    <Col span={12}>
+                        <Alert variant="danger">{error}</Alert>
+                    </Col>
                 </Row>
             </Form>
         </Fragment>
