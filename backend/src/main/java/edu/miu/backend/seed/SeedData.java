@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
-public class SeedData {
+public class  SeedData {
     private final UserService userService;
 
     public SeedData(UserService userService) {
@@ -29,14 +29,12 @@ public class SeedData {
 
         usernameRoles.forEach(role -> {
             User user = new User();
-
             user.setRole(role);
             user.setPassword("1234");
             user.setUsername(role.toString().toLowerCase());
             user.setLastName(role.toString().toUpperCase());
             user.setFirstName(role.toString().toUpperCase());
             user.setEmail(role.toString().toLowerCase() + "@mail.com");
-
             userService.createUser(user);
         });
     }
