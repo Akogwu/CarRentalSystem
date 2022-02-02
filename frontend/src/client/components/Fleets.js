@@ -31,7 +31,7 @@ const Fleets = () => {
                 <div className="fleets">
                     {
                         cars.map( (car,index) =>
-                            <Fleet key={index} img={suv} brand={car.name} model={car.model} description={car.description}/>
+                            <Fleet key={index} carId={car.id} img={suv} brand={car.name} model={car.model} description={car.description} />
                         )
                     }
                 </div>

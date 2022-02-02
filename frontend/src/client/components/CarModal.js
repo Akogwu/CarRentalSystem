@@ -61,6 +61,12 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description  }) => {
                           onFinishFailed={onFinishFailed}
                           form={form}
                     >
+                        <Form.Item name="customerId" hidden={true}>
+                            <Input value="1"/>
+                        </Form.Item>
+                        <Form.Item name="carId" hidden={true}>
+                            <Input value="1"/>
+                        </Form.Item>
                         <Form.Item name="reserve_date">
                             <RangePicker style={{ width: "100%" }}  placeholder={["Pickup date","Return date"]} format="YYYY-MM-DD"/>
                         </Form.Item>

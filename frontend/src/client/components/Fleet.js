@@ -4,7 +4,7 @@ import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
 import CarModal from "./CarModal";
 
-const Fleet = ({ img, brand, model, description }) => {
+const Fleet = ({ img, brand, model, description , carId}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
@@ -37,7 +37,7 @@ const Fleet = ({ img, brand, model, description }) => {
                     </button>
                 </div>
             </div>
-            <CarModal description={description} handleCancel={handleCancel} handleOk={handleOk} title={brand+" "+model} img={img} isModalVisible={isModalVisible}/>
+            <CarModal description={description} handleCancel={handleCancel} carId={carId} handleOk={handleOk} title={brand+" "+model} img={img} isModalVisible={isModalVisible}/>
         </FleetCard>
     );
 };
