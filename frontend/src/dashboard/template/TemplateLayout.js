@@ -1,7 +1,12 @@
 import React, {Fragment} from 'react';
 import {Avatar, Badge, Breadcrumb, Button, Empty, Menu, notification, Popconfirm, Radio, Spin, Table, Tag} from "antd";
-import Layout, {Content, Footer, Header} from "antd/es/layout/layout";
-const Layout = ({children}) => {
+import Layout , {Content, Footer, Header} from "antd/es/layout/layout";
+import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
+const TemplateLayout = ({children}) => {
+
+    const navigate = useNavigate();
+
     return (
         <Fragment>
             <Layout className="layout" style={{ minHeight: '100vh' }}>
@@ -13,8 +18,10 @@ const Layout = ({children}) => {
                                 Smart Car Rental
                             </div>
                         </Menu.Item>
-                        <Menu.Item key="2" >
-                            Cars
+                        <Menu.Item key="2"  >
+                            <Link to="/admin/dashboard/cars">
+                                Cars
+                            </Link>
                         </Menu.Item>
                         <Menu.Item key="3" >
                             Requests
@@ -24,11 +31,11 @@ const Layout = ({children}) => {
                 <Content style={{ padding: '0 50px' }}>
                     {children}
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Smart Car Rental, &cooy; 2022</Footer>
+                <Footer style={{ textAlign: 'center' }}>Smart Car Rental, &coy; 2022</Footer>
             </Layout>
             
         </Fragment>
     );
 };
 
-export default Layout;
+export default TemplateLayout;

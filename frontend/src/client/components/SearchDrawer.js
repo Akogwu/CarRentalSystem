@@ -1,8 +1,8 @@
 import React from 'react';
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Box, Card, CardContent, CardMedia, IconButton, Toolbar, Typography} from "@mui/material";
+import {Box, Button, Card, CardContent, CardMedia, IconButton, Toolbar, Typography} from "@mui/material";
 import {GrFormClose} from "react-icons/gr";
-
+import suv from '../assets/suv_santa.png';
 
 const SearchDrawer = ({NavbarRef, closeDrawer, openDrawer, open}) => {
     const   drawerBleeding = 20;
@@ -33,33 +33,25 @@ const SearchDrawer = ({NavbarRef, closeDrawer, openDrawer, open}) => {
 
 
                 <Card sx={{ display: 'flex' }}>
+                    <CardMedia
+                        component="img"
+                        sx={{ width: 151, objectFit:"contain" }}
+                        image={suv}
+                        alt="Live from space album cover"
+                    />
+
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Typography component="div" variant="h5">
-                                Live From Space
+                                Honda
                             </Typography>
                             <Typography variant="subtitle1" color="text.secondary" component="div">
                                 Mac Miller
                             </Typography>
+                            <Button>Select car</Button>
                         </CardContent>
-                        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                            <IconButton aria-label="previous">
-
-                            </IconButton>
-                            <IconButton aria-label="play/pause">
-
-                            </IconButton>
-                            <IconButton aria-label="next">
-
-                            </IconButton>
-                        </Box>
                     </Box>
-                    <CardMedia
-                        component="img"
-                        sx={{ width: 151 }}
-                        image="/static/images/cards/live-from-space.jpg"
-                        alt="Live from space album cover"
-                    />
+
                 </Card>
             </Box>
 
