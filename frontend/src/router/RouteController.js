@@ -4,7 +4,6 @@ import Dashboard from "../dashboard/Dashboard";
 import Home from "../client";
 import Cars from "../dashboard/components/Cars";
 
-
 const RouteController = () => {
     return (
         <Routes>

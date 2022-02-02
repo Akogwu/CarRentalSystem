@@ -3,13 +3,13 @@ import Modal from "antd/es/modal/Modal";
 import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
 import {DatePicker, Form, Input, notification} from "antd";
+import {postApi} from "../../api/clientApi";
 const { RangePicker } = DatePicker;
 
 
 const CarModal = ({isModalVisible,handleCancel, title,img, description  }) => {
     const [form] = Form.useForm();
     const onFinish = async (values: any) => {
-
         const pickupDate = values.reserve_date[0].format();
         const returnDate = values.reserve_date[1].format();
         console.log(pickupDate,returnDate);
@@ -19,7 +19,7 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description  }) => {
             "returnDate": returnDate,
         }
         try {
-
+            postApi("/")
 
         } catch (e) {
             console.log(e);

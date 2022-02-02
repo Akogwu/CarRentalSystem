@@ -1,30 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import suv from '../assets/suv_santa.png';
 import Fleet from "./Fleet";
+import {getApi} from "../../api/clientApi";
 
 const Fleets = () => {
+    const  [cars,setCars] = useState([]);
+    const [fetching,setFetching] = useState(true);
 
-    const cars = [
-        {
-            brand:"Honda",
-            src:suv,
-            model:"Santa",
-            description:"Need extra room for people, luggage, or cargo? Our minivans offer space and versatility for any occasion."
-        },
-        {
-            brand:"Honda",
-            src:suv,
-            model:"Santa",
-            description:"Need extra room for people, luggage, or cargo? Our minivans offer space and versatility for any occasion."
-        },
-        {
-            brand:"Honda",
-            src:suv,
-            model:"Santa",
-            description:"Need extra room for people, luggage, or cargo? Our minivans offer space and versatility for any occasion."
-        }
-    ]
+
+    useEffect( () => {
+        getApi("/cars")
+            .then( response => {
+                setCars(response.data);
+                setFetching(false);
+            })
+            .catch(err => console.log(err.message))
+            .finally( () => {
+                setFetching(false);
+            } )
+    },[] )
+
 
 
     return (
@@ -34,7 +30,9 @@ const Fleets = () => {
                 <h5 className="text-center text-muted">From SUVs to pickup trucks, wherever you go, we’ve got your ride.</h5>
                 <div className="fleets">
                     {
-                        cars.map( (car,index) => <Fleet key={index} img={car.src} brand={car.brand} model={car.model} description={car.description}/> )
+                        cars.map( (car,index) =>
+                            <Fleet key={index} img={suv} brand={car.name} model={car.model} description={car.description}/>
+                        )
                     }
                 </div>
             </div>
@@ -48,6 +46,7 @@ const FleetSection = styled.div`
       display: flex;
       gap: 1rem;
       padding: 10rem 0 5rem;
+      flex-wrap: wrap
     }
 `;
 

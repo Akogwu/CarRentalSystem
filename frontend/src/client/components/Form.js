@@ -5,7 +5,6 @@ import {getApi} from "../../api/clientApi";
 const Form = () => {
     const [open,setOpen] = useState(false);
     const [brands,setBrands] = useState([]);
-    const [models,setModels] = useState([]);
 
     useEffect( () => {
         loadBrandsAndModel();

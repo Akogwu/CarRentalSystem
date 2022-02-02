@@ -44,8 +44,9 @@ const Fleet = ({ img, brand, model, description }) => {
 
 const FleetCard = styled.div`
     position: relative;
-    flex: 1;
-  
+    flex: 0 0 30.333333%;
+    margin-bottom: 7.2rem;
+    margin-top: 1rem;
   
   .card{
     background-color: #F2F2F2;

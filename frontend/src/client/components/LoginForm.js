@@ -21,10 +21,10 @@ const LoginForm = () => {
         }
         try {
             const isAuth = await userLogin(data);
+            console.log(isAuth);
             if (isAuth.status === 'error') {
                 dispatch(loginFail(isAuth.message))
             }
-
         } catch (e) {
             console.log(e);
         }
