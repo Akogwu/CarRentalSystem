@@ -19,9 +19,8 @@ const Cars = () => {
 
 
     const loadCars = () =>{
-        getApi("/brands")
+        getApi("/cars")
             .then(response => {
-                console.log(response.data)
                 setCars(response.data.map ( (data, index) => {
                     data.key = index+1;
                     data.index = index+1;
@@ -37,10 +36,6 @@ const Cars = () => {
         if (name.length === 0){
             return <Avatar/>
         }
-        const slipt = name.split(" ");
-        if (slipt.length === 1){
-            return <Avatar>{name.charAt(0)}</Avatar>
-        }
         return <Avatar>{`${name.charAt(0)} ${name.charAt(name.length - 1)}`}</Avatar>
     }
 
@@ -48,12 +43,14 @@ const Cars = () => {
         return undefined;
     }
 
+
+
     const columns = [
         {
             title: '',
             dataIndex: 'avatar',
             key: 'avatar',
-            render:(text,car) => <TheAvatar name={car.brand} />
+            render:() => <Avatar/>
         },
         {
             title: '#',
@@ -62,44 +59,31 @@ const Cars = () => {
 
         },
         {
-            title: 'Patient Number',
-            dataIndex: 'patientNumber',
-            key: 'patientNumber',
+            title: 'Reg Number',
+            dataIndex: 'regNo',
+            key: 'regNo',
         },
         {
-            title: 'Full name',
-            dataIndex: 'fullNames',
-            key: 'fullNames',
+            title: 'Brand',
+            dataIndex: 'brand',
+            key: 'brand',
             sorter:true
         },
         {
-            title: 'Email',
-            dataIndex: 'emailAddress',
-            key: 'emailAddress',
+            title: 'Model',
+            dataIndex: 'model',
+            key: 'model',
         },
         {
-            title: 'Contact Phone No.',
-            dataIndex: 'contactPhoneNumber',
-            key: 'contactPhoneNumber',
+            title: 'Year',
+            dataIndex: 'year',
+            key: 'year',
         },
         {
-            title: 'Date of birth.',
-            dataIndex: 'dateOfBirth',
-            key: 'dateOfBirth',
-        }, {
-            title: 'Action',
-            dataIndex: 'action',
-            key: 'action',
-            render: (text,car) =>
-
-                <Popconfirm title='Are you sure to delete'
-                            placement='topRight'
-                            onConfirm={ () => deleteCar(car.id) }
-                            okText='Yes'
-                            cancelText='No'>
-                    <Button>Delete</Button>
-                </Popconfirm>
-        },
+            title: 'Availability',
+            dataIndex: 'status',
+            key: 'status',
+        }
     ];
 
 
@@ -123,7 +107,7 @@ const Cars = () => {
                     <Button type="primary" htmlType="button" >
                         <PlusCircleOutlined/> Add car record
                     </Button><br/><br/>
-                    <Tag>Number of Patients</Tag>
+                    <Tag>Number of Cars</Tag>
                     <Badge count={cars.length} className="site-badge-count" />
                 </>
             }}
@@ -140,7 +124,7 @@ const Cars = () => {
                     <Breadcrumb.Item>Cars</Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="site-layout-content">
-                    {/*{renderCars()}*/}
+                    {renderCars()}
                 </div>
             </Content>
         </Fragment>
