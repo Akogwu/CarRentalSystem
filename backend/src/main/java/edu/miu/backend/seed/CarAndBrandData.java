@@ -65,6 +65,7 @@ public class CarAndBrandData {
                 car.setName(cars.get(brandName));
                 car.setCarBrand(brand.getBrandId());
                 car.setYear("200" + brandName.length());
+                car.setRentalFee(brandName.length() * 20);
                 car.setRegNo("XII ML" + brandName.length() + rand.nextInt(100));
                 // randomly choose car model basing on the brands name length
                 car.setModel(brandName.length() % 2 == 0 ? CarModel.SUV: CarModel.SEDAN);

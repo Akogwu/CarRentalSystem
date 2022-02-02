@@ -1,18 +1,16 @@
-import React, {Fragment, useRef, useState} from 'react';
+import React, {Fragment, useRef} from 'react';
 import {Button, Col, Form, Input, Row} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {loginPending,loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
+import {loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
 import {Alert} from "react-bootstrap";
 import {userLogin} from "../../api/userApi";
 
 
 const LoginForm = () => {
-    const formRef = useRef(null);
-    const [sending,setSending] = useState(false);
     const dispatch = useDispatch();
+    const formRef = useRef(null);
     const {isLoading,error} = useSelector(state => state.login);
 
-    const dateFormat = 'YYYY-MM-DD';
     const onFinish = async (values) => {
         // setSending(true);
         const data = {

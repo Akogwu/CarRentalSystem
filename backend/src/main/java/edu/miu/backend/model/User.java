@@ -4,14 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -26,19 +22,30 @@ public class User {
     private Long id;
 
     @JsonIgnore
+    @NotBlank(message = "Password is required")
     private String password;
-    @NotEmpty(message = "First Name is required")
+
+    @NotBlank(message = "First Name is required")
     @Size(min = 2, max = 20)
     private String firstName;
-    @NotEmpty(message = "Last Name is required")
+
+    @NotBlank(message = "Last Name is required")
     @Size(min = 2, max = 20)
     private String lastName;
+
     @Email
-    @NotEmpty
+    @NotBlank
     private String email;
+
     @Column(unique = true)
-    @NotEmpty(message = "username is required")
+    @NotBlank(message = "username is required")
     private String username;
+
+    @Column(unique = true)
+    private String driverLicenseNumber;
+
+    @Column(unique = true)
+    private String contactPhoneNumber;
 
     @NotNull
     @Column(nullable = false)

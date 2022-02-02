@@ -1,5 +1,6 @@
 package edu.miu.backend.services.impl;
 
+import edu.miu.backend.dto.UserDTO;
 import edu.miu.backend.exception.CustomException;
 import edu.miu.backend.model.User;
 import edu.miu.backend.repository.UserRepository;
@@ -41,6 +42,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
+    }
+
+    public User registerUser(UserDTO userDTO) throws CustomException {
+        User user = new User();
+
+        user.setRole(userDTO.getRole());
+        user.setEmail(userDTO.getEmail());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setLastName(userDTO.getLastName());
+        user.setFirstName(userDTO.getFirstName());
+        user.setContactPhoneNumber(userDTO.getContactPhoneNumber());
+        user.setDriverLicenseNumber(userDTO.getDriverLicenseNumber());
+
+        return createUser(user);
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
