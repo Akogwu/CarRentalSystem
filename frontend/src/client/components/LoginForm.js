@@ -12,22 +12,12 @@ const LoginForm = () => {
 
     const dateFormat = 'YYYY-MM-DD';
     const onFinish = (values: any) => {
-        // setSending(true);
-        // const data = {
-        //     "patientNumber": values.patientNumber,
-        //     "isAnOutPatient": values.isAnOutPatient,
-        //     "fullNames": values.fullNames,
-        //     "emailAddress": values.emailAddress,
-        //     "contactPhoneNumber": values.contactPhoneNumber,
-        //     "dateOfBirth": values.dateOfBirth
-        // }
         dispatch(loginPending())
     };
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
-
 
     return (
         <Fragment>

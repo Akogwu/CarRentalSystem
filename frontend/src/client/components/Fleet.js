@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
-import Modal from "antd/es/modal/Modal";
+import CarModal from "./CarModal";
 
 const Fleet = ({ img, brand, model, description }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -37,11 +37,7 @@ const Fleet = ({ img, brand, model, description }) => {
                     </button>
                 </div>
             </div>
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
+            <CarModal description={description} handleCancel={handleCancel} handleOk={handleOk} title={brand+" "+model} img={img} isModalVisible={isModalVisible}/>
         </FleetCard>
     );
 };
@@ -96,6 +92,8 @@ const FleetCard = styled.div`
       }
       
     }
+    
+    
   }
 `;
 export default Fleet;
