@@ -38,8 +38,8 @@ public class PaymentController {
         return paymentService.save(payment);
     }
 
-    @DeleteMapping(value = "/admin/payments/{id}")
+    /*@DeleteMapping(value = "/admin/payments/{id}")
     public void deletePayment(@PathVariable Long id) throws Exception {
         paymentService.delete(id);
-    }
+    }*/
 }
