@@ -30,5 +30,13 @@ public class Reservation {
     @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private ReservationStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "carId")
+    private Car car;
+
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private User customer;
 }

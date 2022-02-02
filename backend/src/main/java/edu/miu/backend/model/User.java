@@ -40,13 +40,10 @@ public class User {
     @NotEmpty(message = "username is required")
     private String username;
 
-    private boolean loggedIn;
-
     @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
     @Override
     public boolean equals(Object o) {
@@ -58,8 +55,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password,
-                loggedIn);
+        return Objects.hash(id, username, password);
     }
 
     @Override
@@ -67,9 +63,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", loggedIn=" + loggedIn +
-                '}';
+                ", password='" + password + '\'' + '}';
     }
 
     /**
@@ -78,6 +72,7 @@ public class User {
      *
      * @return Set<SimpleGrantedAuthority>
      */
+    @JsonIgnore
     public Set<SimpleGrantedAuthority> getAuthorities() {
         Set<SimpleGrantedAuthority> permissions = new HashSet<>();
         permissions.add(new SimpleGrantedAuthority("ROLE_" + getRole().toString()));

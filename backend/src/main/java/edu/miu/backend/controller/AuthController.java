@@ -2,6 +2,9 @@ package edu.miu.backend.controller;
 
 import edu.miu.backend.dto.AuthDTO;
 import edu.miu.backend.jwt.JWTUtil;
+import edu.miu.backend.model.User;
+import edu.miu.backend.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,15 +23,19 @@ import java.util.HashMap;
 @RequestMapping("/auth")
 public class AuthController {
     private final JWTUtil jwtUtil;
+    private UserService userService;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
     public AuthController(
             JWTUtil jwtUtil,
+            UserService userService,
             UserDetailsService userDetailsService,
             AuthenticationManager authenticationManager
     ) {
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
     }
@@ -52,5 +59,12 @@ public class AuthController {
         return ResponseEntity.ok(new HashMap<String, Object>(){{
             put("token", jwt);
         }});
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(
+            @Valid @RequestBody User user
+    ) throws Exception {
+        return ResponseEntity.ok(userService.createUser(user));
     }
 }
