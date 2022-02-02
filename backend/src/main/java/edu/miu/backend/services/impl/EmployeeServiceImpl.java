@@ -1,14 +1,13 @@
 package edu.miu.backend.services.impl;
-
-import edu.miu.backend.model.Car;
 import edu.miu.backend.model.Employee;
 import edu.miu.backend.repository.EmployeeRepository;
 import edu.miu.backend.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-public abstract  class EmployeeServiceImpl implements EmployeeService {
+@Service
+public  class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
 

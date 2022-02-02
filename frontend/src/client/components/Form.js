@@ -1,6 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import SearchDrawer from "./SearchDrawer";
+import {getApi} from "../../api/clientApi";
 const Form = () => {
+    const [open,setOpen] = useState(false);
+    const [brands,setBrands] = useState([]);
+    const [models,setModels] = useState([]);
+
+    useEffect( () => {
+        loadBrandsAndModel();
+    },[] )
+    
+    const loadBrandsAndModel = () => {
+        getApi("/brands").then( response => {
+            setBrands(response.data)
+        }).catch( error => {
+            console.log(error);
+        });
+    }
+
+    const setOpenDrawer = () => {
+        setOpen(true);
+    }
+
+    const setCloseDrawer = () => {
+        setOpen(false);
+    }
+
     return (
         <FormContainer>
             <div className="search">
@@ -11,16 +37,16 @@ const Form = () => {
                                 <label htmlFor="brands" className="visually-hidden">Brand</label>
                                 <input list="brands" id="brand" name="brand"  placeholder="Brand"/>
                                 <datalist id="brands">
-                                    <option value="Honda"/>
-                                    <option value="Toyota"/>
+                                    { brands.map( brand => <option key={brand.id} value={brand.name}/> ) }
                                 </datalist>
                             </div>
                             <div className="group">
                                 <label htmlFor="models" className="visually-hidden">Model</label>
                                 <input list="models" id="model" name="model" placeholder="Model" />
                                 <datalist id="models">
-                                    <option value="2021 model"/>
-                                    <option value="I series"/>
+                                    <option value="SUV"/>
+                                    <option value="TRUCK"/>
+                                    <option value="SEDAN"/>
                                 </datalist>
                             </div>
                         </div>
@@ -32,10 +58,11 @@ const Form = () => {
                         </div>
                     </div>
                     <div className="submit-button">
-                        <button type="submit">Search cars</button>
+                        <button type="button" onClick={ ()=>setOpenDrawer() }>Search cars</button>
                     </div>
                 </form>
             </div>
+            <SearchDrawer NavbarRef={null} closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open}/>
         </FormContainer>
     );
 };

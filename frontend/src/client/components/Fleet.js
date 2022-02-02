@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
+import CarModal from "./CarModal";
 
 const Fleet = ({ img, brand, model, description }) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <FleetCard>
             <div className="card">
@@ -16,13 +30,14 @@ const Fleet = ({ img, brand, model, description }) => {
                     <ul className="specification">
                         <li> <IoPeopleCircleOutline/> 4 people </li>
                         <li> <GiGymBag/> 3 bag </li>
-                        <li> <GiAutoRepair/> authomatic </li>
+                        <li> <GiAutoRepair/> automatic </li>
                     </ul>
-                    <button className="select-button">
+                    <button className="select-button" onClick={showModal}>
                         Select car
                     </button>
                 </div>
             </div>
+            <CarModal description={description} handleCancel={handleCancel} handleOk={handleOk} title={brand+" "+model} img={img} isModalVisible={isModalVisible}/>
         </FleetCard>
     );
 };
@@ -77,6 +92,8 @@ const FleetCard = styled.div`
       }
       
     }
+    
+    
   }
 `;
 export default Fleet;
