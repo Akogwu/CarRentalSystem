@@ -2,14 +2,14 @@ spring:
   datasource:
     password: ${SPRINGDATASOURCEPASSWORD:root}
     username: ${SPRINGDATASOURCEUSERNAME:root}
-    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
+    url: ${SPRINGDATASOURCEURL:jdbc:mysql://localhost:3306/rental}
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       maximumPoolSize: 10
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
