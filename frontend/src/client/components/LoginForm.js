@@ -1,5 +1,5 @@
 import React, {Fragment, useRef, useState} from 'react';
-import {Button, Col, Form, Input, notification, Row} from "antd";
+import {Button, Col, Form, Input, Row} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {loginPending,loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
 import {Alert} from "react-bootstrap";
@@ -10,28 +10,26 @@ const LoginForm = () => {
     const formRef = useRef(null);
     const [sending,setSending] = useState(false);
     const dispatch = useDispatch();
-    const {isLoading,isAuth,error} = useSelector(state => state.login);
+    const {isLoading,error} = useSelector(state => state.login);
 
     const dateFormat = 'YYYY-MM-DD';
-    const onFinish = async (values: any) => {
+    const onFinish = async (values) => {
         // setSending(true);
         const data = {
             "username": values.username,
             "password": values.password,
         }
         try {
-            const isAuth = await userLogin(data);
-            console.log(isAuth);
-            if (isAuth.status === 'error') {
-                dispatch(loginFail(isAuth.message))
-            }
+            const response = await userLogin(data);
+            localStorage.setItem("token", response.token);
+            dispatch(loginSuccess());
         } catch (e) {
-            console.log(e);
+            console.log(e?.data?.error?.message);
+            dispatch(loginFail(e?.data?.error?.message || "Something went wrong"))
         }
-
     }
 
-    const onFinishFailed = (errorInfo: any) => {
+    const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
@@ -41,6 +39,14 @@ const LoginForm = () => {
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
                   ref={formRef}>
+                {
+                  error &&
+                  <Row style={{paddingTop:12, width:'100%'}}>
+                      <Col span={24}>
+                          <Alert variant="danger">{error}</Alert>
+                      </Col>
+                  </Row>
+                }
                 <Row gutter={16}>
                     <Col span={12}>
                         <Form.Item
@@ -65,11 +71,6 @@ const LoginForm = () => {
                     <Button type="primary" htmlType="submit"  disabled={isLoading} loading={isLoading}>
                         {isLoading? 'Please wait ... ': 'Submit'}
                     </Button>
-                </Row>
-                <Row style={{paddingTop:12, width:'100%'}}>
-                    <Col span={12}>
-                        <Alert variant="danger">{error}</Alert>
-                    </Col>
                 </Row>
             </Form>
         </Fragment>
