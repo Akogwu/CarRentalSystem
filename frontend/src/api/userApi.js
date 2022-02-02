@@ -9,6 +9,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error);
 });
+
 export const userLogin = formData => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -17,10 +18,16 @@ export const userLogin = formData => {
     } catch ({response}) {
       reject(response)
     }
-  })
+  });
+}
 
-  /*return axios.post("/auth/login",formData)
-              .then( response => {return response})
-              .catch( error => {return error});*/
-
+export const userRegistration = formData => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.post("/auth/register", formData);
+      resolve(response.data);
+    } catch ({response}) {
+      reject(response)
+    }
+  });
 }

@@ -17,4 +17,5 @@ public class CarDTO implements Serializable {
     private String regNo;
     private Long carBrand;
     private CarModel model;
+    private Integer rentalFee;
 }
