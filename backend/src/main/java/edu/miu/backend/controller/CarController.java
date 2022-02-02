@@ -3,7 +3,9 @@ package edu.miu.backend.controller;
 import edu.miu.backend.dto.CarDTO;
 import edu.miu.backend.model.Car;
 import edu.miu.backend.model.CarModel;
+import edu.miu.backend.model.Reservation;
 import edu.miu.backend.services.CarService;
+import edu.miu.backend.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,30 @@ import java.util.List;
 @RequestMapping("/cars")
 public class CarController {
     private CarService carService;
+    private ReservationService reservationService;
 
     @Autowired
     public void setCarService(CarService carService) {
         this.carService = carService;
     }
 
+    @Autowired
+    public void setReservationService(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+
     @GetMapping
     public ResponseEntity<List<Car>> getAllCars() {
         return ResponseEntity.ok(carService.findAll());
+    }
+
+    @GetMapping("/{carId}/reservations")
+    public ResponseEntity<List<Reservation>> getAllCarReservations(
+            @PathVariable("carId") Long carId
+    ) {
+        return ResponseEntity.ok(
+                reservationService.findAllByCarId(carId)
+        );
     }
 
     @GetMapping("/byYear")
