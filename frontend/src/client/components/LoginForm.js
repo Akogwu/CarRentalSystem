@@ -5,6 +5,7 @@ import {loginPending,loginSuccess,loginFail} from "../../features/reducers/Login
 import {Alert} from "react-bootstrap";
 import {userLogin} from "../../api/userApi";
 
+
 const LoginForm = () => {
     const formRef = useRef(null);
     const [sending,setSending] = useState(false);
@@ -20,21 +21,19 @@ const LoginForm = () => {
         }
         try {
             const isAuth = await userLogin(data);
-            if (isAuth.status === 'error'){
+            if (isAuth.status === 'error') {
                 dispatch(loginFail(isAuth.message))
             }
 
-        }catch (e) {
+        } catch (e) {
             console.log(e);
         }
 
-        dispatch(loginPending())
-    };
+    }
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
-
 
     return (
         <Fragment>

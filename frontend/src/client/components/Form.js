@@ -1,6 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
+import SearchDrawer from "./SearchDrawer";
 const Form = () => {
+    const [open,setOpen] = useState(false);
+
+    const setOpenDrawer = () => {
+        setOpen(true);
+    }
+
+    const setCloseDrawer = () => {
+        setOpen(false);
+    }
+
     return (
         <FormContainer>
             <div className="search">
@@ -32,10 +43,11 @@ const Form = () => {
                         </div>
                     </div>
                     <div className="submit-button">
-                        <button type="submit">Search cars</button>
+                        <button type="button" onClick={ ()=>setOpenDrawer() }>Search cars</button>
                     </div>
                 </form>
             </div>
+            <SearchDrawer NavbarRef={null} closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open}/>
         </FormContainer>
     );
 };
