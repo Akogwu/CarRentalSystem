@@ -41,6 +41,8 @@ public class Car {
     @JoinColumn(name = "brandId", nullable = false)
     private CarBrand brand;
 
+    private Boolean isReserved = false;
+
     @Override
     public String toString() {
         return "Car {" + "year = '" + year + '\'' +
