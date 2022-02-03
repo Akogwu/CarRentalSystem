@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import SearchDrawer from "./SearchDrawer";
+// import SearchDrawer from "./SearchDrawer";
 import {getApi} from "../../api/clientApi";
-import { Select } from '@mui/material';
-const Form = () => {
-    const [open,setOpen] = useState(false);
-    const [brands,setBrands] = useState([]);
+
+const Form = ({onSearchCars}) => {
+    // const [open, setOpen] = useState(false);
+    const [brands, setBrands] = useState([]);
+    const [selectedBrand, setSelectedBrand] = useState('');
+    const [selectedModel, setSelectedModel] = useState('');
 
     useEffect( () => {
         loadBrandsAndModel();
-    },[] )
-    
+    },[])
+
     const loadBrandsAndModel = () => {
         getApi("/brands").then( response => {
             setBrands(response.data)
@@ -19,13 +21,17 @@ const Form = () => {
         });
     }
 
-    const setOpenDrawer = () => {
-        setOpen(true);
+    const searchCars = () => {
+        onSearchCars(selectedModel, selectedBrand);
     }
 
-    const setCloseDrawer = () => {
-        setOpen(false);
-    }
+    // const setOpenDrawer = () => {
+    //     setOpen(true);
+    // }
+
+    // const setCloseDrawer = () => {
+    //     setOpen(false);
+    // }
 
     return (
         <FormContainer>
@@ -35,14 +41,20 @@ const Form = () => {
                         <div className="brand-models">
                             <div className="group">
                                 <label htmlFor="brands" className="visually-hidden">Brand</label>
-                                <select name="brand" id="brands">
+                                <select name="brand" id="brands" onChange={(e) => {
+                                    setSelectedBrand(e.target.value);
+                                }}>
+                                    <option value="">Select Brand</option>
                                     { brands.map( brand => <option key={brand.id} value={brand.name}>{brand.name}</option> ) }
                                 </select>
                             </div>
                             <div className="group">
                                 <label htmlFor="models" className="visually-hidden">Model</label>
 
-                                <select name='model'>
+                                <select name='model' onChange={(e) => {
+                                    setSelectedModel(e.target.value);
+                                }}>
+                                    <option value="">Select Model</option>
                                     <option value="SUV">SUV</option>
                                     <option value="TRUCK">TRUCK</option>
                                     <option value="SEDAN">SEDAN</option>
@@ -58,11 +70,11 @@ const Form = () => {
                         </div>
                     </div>
                     <div className="submit-button">
-                        <button type="button" onClick={ ()=>setOpenDrawer() }>Search cars</button>
+                        <button type="button" onClick={ () => searchCars() }>Search cars</button>
                     </div>
                 </form>
             </div>
-            <SearchDrawer NavbarRef={null} closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open}/>
+            {/*<SearchDrawer NavbarRef={null} closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open}/>*/}
         </FormContainer>
     );
 };
@@ -122,4 +134,5 @@ const FormContainer = styled.div`
       }
     }
 `;
+
 export default Form;
