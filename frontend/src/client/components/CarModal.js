@@ -13,13 +13,12 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  })
     const customerId = localStorage.getItem("userId");
 
     useEffect(()=>{
-        console.log(carId);
         form.setFieldsValue({
             "carId":carId,
         })
         form.setFieldsValue({
             "customerId":customerId,
-        
+
         })
     },[])
 
@@ -30,7 +29,7 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  })
         });
     }
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values) => {
         const pickupDate = values.reserve_date[0];
         const returnDate = values.reserve_date[1];
         const data = {
@@ -50,7 +49,7 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  })
 
     }
 
-    const onFinishFailed = (errorInfo: any) => {
+    const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 

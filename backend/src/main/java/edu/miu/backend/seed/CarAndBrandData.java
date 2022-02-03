@@ -12,10 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Component
 @Transactional(propagation = Propagation.REQUIRED)
@@ -23,6 +20,16 @@ public class CarAndBrandData {
     private CarService carService;
     private final Random rand = new Random();
     private CarBrandService carBrandService;
+    Stack<String> images = new Stack<>(){{
+        add("https://images.pexels.com/photos/112475/pexels-photo-112475.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/4077271/pexels-photo-4077271.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/4502384/pexels-photo-4502384.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/4501407/pexels-photo-4501407.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/4928606/pexels-photo-4928606.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/2838729/pexels-photo-2838729.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+        add("https://images.pexels.com/photos/241316/pexels-photo-241316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+        add("https://images.pexels.com/photos/38637/car-audi-auto-automotive-38637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    }};
 
     @Autowired
     public void setCarService(CarService carService) {
@@ -45,6 +52,7 @@ public class CarAndBrandData {
         }};
 
         HashMap<String, String> cars = new HashMap<>(){{
+            put("GMC", "Cameo");
             put("Mazda", "XC 60");
             put("Ford", "Mustang");
             put("Toyota", "Supra");
@@ -62,6 +70,7 @@ public class CarAndBrandData {
             if (cars.containsKey(brandName)) {
                 CarDTO car = new CarDTO();
 
+                car.setImageCover(images.pop());
                 car.setName(cars.get(brandName));
                 car.setCarBrand(brand.getBrandId());
                 car.setYear("200" + brandName.length());

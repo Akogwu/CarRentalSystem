@@ -12,7 +12,7 @@ public interface ReservationService {
     Reservation findById(Long reservationId);
     List<Reservation> findAllReservations();
     List<Reservation> findAllByCarId(Long carId);
-    List<Reservation> findAllByUserId(Long userId);
+    List<Reservation> findAllByCustomerId(Long customerId);
     Reservation confirm(Long reservationId) throws CustomException;
     Reservation cancel(Long reservationId) throws CustomException;
     Reservation makerInProgress(Long reservationId) throws CustomException;

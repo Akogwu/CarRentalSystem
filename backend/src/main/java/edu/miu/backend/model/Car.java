@@ -36,6 +36,8 @@ public class Car {
     @Column(nullable = false)
     private CarModel model;
 
+    private String imageCover;
+
     @NotNull
     @Column(nullable = false)
     private boolean status = false;

@@ -4,10 +4,24 @@ import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
 import CarModal from "./CarModal";
 
+import {notification} from "antd";
+
 const Fleet = ({ img, brand, model, description , carId}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showNotification = (type, title, message) => {
+        notification[type]({
+            message: title,
+            description: message
+        });
+    }
+
     const showModal = () => {
-        setIsModalVisible(true);
+        if(localStorage.getItem("token")) {
+            setIsModalVisible(true);
+        } else {
+            showNotification("warning", "Warning", "Sorry you need to login to make reservation.");
+        }
     };
 
     const handleOk = () => {

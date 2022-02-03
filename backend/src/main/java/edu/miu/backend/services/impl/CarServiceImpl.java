@@ -41,6 +41,7 @@ public class CarServiceImpl implements CarService {
         car.setRegNo(carDTO.getRegNo());
         car.setModel(carDTO.getModel());
         car.setRentalFee(carDTO.getRentalFee());
+        car.setImageCover(carDTO.getImageCover());
         car.setBrand(carBrandService.findById(carDTO.getCarBrand()));
 
         return carRepository.save(car);

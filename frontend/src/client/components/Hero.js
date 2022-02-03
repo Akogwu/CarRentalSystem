@@ -4,10 +4,10 @@ import hero from "../assets/new-york.jpg";
 import car from "../assets/benz.png";
 import Form from "./Form";
 
-const Hero = () => {
+const Hero = ({onSearchCars}) => {
     return (
         <HeroSection bg={hero}>
-            <Form/>
+            <Form onSearchCars={onSearchCars}/>
             <img src={car} alt="Car"/>
         </HeroSection>
     );
