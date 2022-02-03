@@ -17,10 +17,10 @@ const Fleet = ({ img, brand, model, description , carId}) => {
     }
 
     const showModal = () => {
-        if(localStorage.getItem("token")) {
+        if(localStorage.getItem("token") && localStorage.getItem("role") === "CUSTOMER" ) {
             setIsModalVisible(true);
         } else {
-            showNotification("warning", "Warning", "Sorry you need to login to make reservation.");
+            showNotification("warning", "Warning", "Sorry you need to login as customer to make reservation.");
         }
     };
 

@@ -111,7 +111,7 @@ const Cars = () => {
                 </>
             }}
             pagination={{ pageSize:50 }}
-            rowKey={ (patient) => patient.id }
+            rowKey={ (car) => car.id }
         />
     }
 

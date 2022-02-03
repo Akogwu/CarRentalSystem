@@ -38,7 +38,6 @@ export const CardTabs = () => {
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Tag>Number of Cars</Tag>
                             <Badge count={8} className="site-badge-count" />
-                            
                             <Button>View all cars</Button>
                         </CardContent>
                     </Box>
