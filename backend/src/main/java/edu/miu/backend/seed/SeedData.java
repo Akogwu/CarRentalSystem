@@ -29,8 +29,6 @@ public class  SeedData {
             add("admin");
             add("employee");
         }};
-        int phoneCounter = 1;
-
         employees.forEach(name -> {
             User user = new User();
             user.setPassword("1234");

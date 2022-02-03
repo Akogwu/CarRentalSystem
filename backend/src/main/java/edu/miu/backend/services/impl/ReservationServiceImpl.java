@@ -50,9 +50,9 @@ public class ReservationServiceImpl implements ReservationService {
                 .findAllByCarId(carId);
     }
 
-    public List<Reservation> findAllByUserId(Long userId) {
+    public List<Reservation> findAllByCustomerId(Long customerId) {
         return reservationRepository
-                .findAllByCarId(userId);
+                .findAllByCustomerId(customerId);
     }
 
     public Reservation cancel(Long reservationId) throws CustomException {
@@ -89,6 +89,16 @@ public class ReservationServiceImpl implements ReservationService {
         return reservation;
     }
 
+    private boolean checkIfCustomerHasPendingReservations(User customer) {
+        List<Reservation> foundReservations = findAllByCustomerId(customer.getId());
+        return foundReservations.stream()
+                .filter(reservation ->
+                        reservation.getStatus() != ReservationStatus.CANCELLED &&
+                        reservation.getStatus() != ReservationStatus.COMPLETED
+                )
+                .toList().size() != 0;
+    }
+
     public Reservation create(
             ReservationDTO reservationDTO,
             org.springframework.security.core.userdetails.User loggedInUser
@@ -98,6 +108,9 @@ public class ReservationServiceImpl implements ReservationService {
         User customer = userService.findByUsername(loggedInUser.getUsername());
         if (customer.getRole() != Role.CUSTOMER) {
             throw new CustomException("User making a reservation is not a customer.");
+        }
+        if (checkIfCustomerHasPendingReservations(customer)) {
+            throw new CustomException("Sorry you have reservation that is still active.");
         }
 
         reservation.setStatus(ReservationStatus.STARTED);
