@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import PropTypes from 'prop-types';
 import {Box, IconButton, Toolbar, Typography} from "@mui/material";
@@ -7,9 +7,11 @@ import {GrFormClose} from "react-icons/gr";
 import LoginForm from "./LoginForm";
 import {Radio} from "antd";
 import RegisterForm from "./RegisterForm";
+
 const RegisterAndLoginDrawer = ({NavbarRef, closeDrawer, openDrawer, open}) => {
     const [login,setLogin] = useState(true);
     const drawerBleeding = 20;
+    
 
     return (
         <SwipeableDrawer

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import SearchDrawer from "./SearchDrawer";
 import {getApi} from "../../api/clientApi";
+import { Select } from '@mui/material';
 const Form = () => {
     const [open,setOpen] = useState(false);
     const [brands,setBrands] = useState([]);
@@ -34,19 +35,19 @@ const Form = () => {
                         <div className="brand-models">
                             <div className="group">
                                 <label htmlFor="brands" className="visually-hidden">Brand</label>
-                                <input list="brands" id="brand" name="brand"  placeholder="Brand"/>
-                                <datalist id="brands">
-                                    { brands.map( brand => <option key={brand.id} value={brand.name}/> ) }
-                                </datalist>
+                                <select name="brand" id="brands">
+                                    { brands.map( brand => <option key={brand.id} value={brand.name}>{brand.name}</option> ) }
+                                </select>
                             </div>
                             <div className="group">
                                 <label htmlFor="models" className="visually-hidden">Model</label>
-                                <input list="models" id="model" name="model" placeholder="Model" />
-                                <datalist id="models">
-                                    <option value="SUV"/>
-                                    <option value="TRUCK"/>
-                                    <option value="SEDAN"/>
-                                </datalist>
+
+                                <select name='model'>
+                                    <option value="SUV">SUV</option>
+                                    <option value="TRUCK">TRUCK</option>
+                                    <option value="SEDAN">SEDAN</option>
+                                </select>
+
                             </div>
                         </div>
                         <div className="search-input">

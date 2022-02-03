@@ -13,6 +13,7 @@ const Fleets = () => {
         getApi("/cars")
             .then( response => {
                 setCars(response.data);
+                console.log(response.data);
                 setFetching(false);
             })
             .catch(err => console.log(err.message))
@@ -30,8 +31,8 @@ const Fleets = () => {
                 <h5 className="text-center text-muted">From SUVs to pickup trucks, wherever you go, we’ve got your ride.</h5>
                 <div className="fleets">
                     {
-                        cars.map( (car,index) =>
-                            <Fleet key={index} img={suv} brand={car.name} model={car.model} description={car.description}/>
+                       cars.length > 0 && cars.map( (car,index) =>
+                            <Fleet key={index} carId={car.carId} img={suv} brand={car.name} model={car.model} description={car.description} />
                         )
                     }
                 </div>

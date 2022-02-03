@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ReservationService {
     Reservation findById(Long reservationId);
+    List<Reservation> findAllReservations();
     List<Reservation> findAllByCarId(Long carId);
     List<Reservation> findAllByUserId(Long userId);
     Reservation confirm(Long reservationId) throws CustomException;

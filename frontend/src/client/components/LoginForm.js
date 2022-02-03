@@ -4,10 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
 import {Alert} from "react-bootstrap";
 import {userLogin} from "../../api/userApi";
+import { useNavigate } from 'react-router';
 
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const formRef = useRef(null);
     const {isLoading,error} = useSelector(state => state.login);
 
@@ -20,9 +22,12 @@ const LoginForm = () => {
         try {
             const response = await userLogin(data);
             localStorage.setItem("token", response.token);
+            const {id,firstName,role} = response.user;
+            localStorage.setItem("userId",id);
+            localStorage.setItem("firstName",firstName);
+            if(role === "EMPLOYEE") navigate("/admin/dashboard");
             dispatch(loginSuccess());
         } catch (e) {
-            console.log(e?.data?.error?.message);
             dispatch(loginFail(e?.data?.error?.message || "Something went wrong"))
         }
     }
@@ -60,8 +65,9 @@ const LoginForm = () => {
                             name="password"
                             label="Password"
                             rules={[{ required: true, message: '*Password is required' }]}
+
                         >
-                            <Input placeholder="Please enter email address"/>
+                            <Input.Password placeholder="Please enter email address"/>
                         </Form.Item>
                     </Col>
                 </Row>

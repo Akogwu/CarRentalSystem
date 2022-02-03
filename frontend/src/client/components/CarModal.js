@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from "antd/es/modal/Modal";
 import {IoPeopleCircleOutline} from "react-icons/io5";
 import {GiAutoRepair, GiGymBag} from "react-icons/gi";
@@ -7,19 +7,42 @@ import {postApi} from "../../api/clientApi";
 const { RangePicker } = DatePicker;
 
 
-const CarModal = ({isModalVisible,handleCancel, title,img, description  }) => {
+const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  }) => {
     const [form] = Form.useForm();
-    const onFinish = async (values: any) => {
-        const pickupDate = values.reserve_date[0].format();
-        const returnDate = values.reserve_date[1].format();
-        console.log(pickupDate,returnDate);
 
+    const customerId = localStorage.getItem("userId");
+
+    useEffect(()=>{
+        console.log(carId);
+        form.setFieldsValue({
+            "carId":carId,
+        })
+        form.setFieldsValue({
+            "customerId":customerId,
+        
+        })
+    },[])
+
+    const successNotification = () => {
+        notification["success"]({
+            message:"your reservation was successful",
+            description:"The vehicle will be available for pickup"
+        });
+    }
+
+    const onFinish = async (values: any) => {
+        const pickupDate = values.reserve_date[0];
+        const returnDate = values.reserve_date[1];
         const data = {
             "pickupDate": pickupDate,
             "returnDate": returnDate,
+            "customerId":values.customerId,
+            "carId":values.carId
         }
         try {
-            postApi("/")
+            postApi("/reservations",data).then(response => {
+                successNotification();
+            }).catch( error => console.log(error()))
 
         } catch (e) {
             console.log(e);
@@ -61,6 +84,12 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description  }) => {
                           onFinishFailed={onFinishFailed}
                           form={form}
                     >
+                        <Form.Item name="customerId" hidden={true}>
+                            <Input value="1"/>
+                        </Form.Item>
+                        <Form.Item name="carId" hidden={true}>
+                            <Input value="1"/>
+                        </Form.Item>
                         <Form.Item name="reserve_date">
                             <RangePicker style={{ width: "100%" }}  placeholder={["Pickup date","Return date"]} format="YYYY-MM-DD"/>
                         </Form.Item>

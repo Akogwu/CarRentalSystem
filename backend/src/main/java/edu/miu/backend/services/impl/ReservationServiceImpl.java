@@ -8,6 +8,7 @@ import edu.miu.backend.services.CarService;
 import edu.miu.backend.services.ReservationService;
 import edu.miu.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -37,6 +38,11 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation findById(Long reservationId) {
         return reservationRepository.findById(reservationId)
                 .orElse(null);
+    }
+
+    @Override
+    public List<Reservation> findAllReservations() {
+        return reservationRepository.findAll(Sort.by(Sort.Direction.DESC,"pickupDate"));
     }
 
     public List<Reservation> findAllByCarId(Long carId) {
