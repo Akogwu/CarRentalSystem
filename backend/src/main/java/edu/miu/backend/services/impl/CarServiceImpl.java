@@ -59,7 +59,19 @@ public class CarServiceImpl implements CarService {
     }
 
     public Car updateCar(Long carId, Car car) {
-        return null;
+        Car attachedCar = findById(carId);
+        if (attachedCar == null) {
+            return null;
+        }
+        attachedCar.setYear(car.getYear());
+        attachedCar.setName(car.getName());
+        attachedCar.setBrand(car.getBrand());
+        attachedCar.setModel(car.getModel());
+        attachedCar.setRegNo(car.getRegNo());
+        attachedCar.setRentalFee(car.getRentalFee());
+        attachedCar.setIsReserved(car.getIsReserved());
+
+        return carRepository.save(car);
     }
 
     public List<Car> findCarsByYear(String year) {

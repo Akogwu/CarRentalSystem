@@ -83,9 +83,16 @@ public class ReservationServiceImpl implements ReservationService {
         return reservation;
     }
 
-    public Reservation create(ReservationDTO reservationDTO) throws CustomException {
+    public Reservation create(
+            ReservationDTO reservationDTO,
+            org.springframework.security.core.userdetails.User loggedInUser
+    ) throws CustomException {
         Reservation reservation = new Reservation();
         mapReservationDtoToReservation(reservationDTO, reservation);
+        User customer = userService.findByUsername(loggedInUser.getUsername());
+        if (customer.getRole() != Role.CUSTOMER) {
+            throw new CustomException("User making a reservation is not a customer.");
+        }
 
         reservation.setStatus(ReservationStatus.STARTED);
 

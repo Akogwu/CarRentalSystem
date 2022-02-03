@@ -7,6 +7,8 @@ import edu.miu.backend.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,10 +25,11 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<Reservation> makeCarReservation(
-            @RequestBody ReservationDTO reservationDTO
-    ) throws CustomException {
+            @RequestBody ReservationDTO reservationDTO,
+            @AuthenticationPrincipal User loggedInUser
+            ) throws CustomException {
         return new ResponseEntity<>(
-                reservationService.create(reservationDTO),
+                reservationService.create(reservationDTO, loggedInUser),
                 HttpStatus.CREATED
         );
     }
