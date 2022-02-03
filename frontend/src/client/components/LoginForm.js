@@ -1,25 +1,35 @@
-import React, {Fragment, useRef, useState} from 'react';
-import {Button, Col, DatePicker, Drawer, Form, Input, notification, Row, Select, Space} from "antd";
-const LoginForm = () => {
-    const formRef = useRef(null);
-    const [sending,setSending] = useState(false);
-    const dateFormat = 'YYYY-MM-DD';
-    const onFinish = (values: any) => {
-        setSending(true);
-        const data = {
-            "patientNumber": values.patientNumber,
-            "isAnOutPatient": values.isAnOutPatient,
-            "fullNames": values.fullNames,
-            "emailAddress": values.emailAddress,
-            "contactPhoneNumber": values.contactPhoneNumber,
-            "dateOfBirth": values.dateOfBirth
-        }
-    };
+import React, {Fragment, useRef} from 'react';
+import {Button, Col, Form, Input, Row} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {loginSuccess,loginFail} from "../../features/reducers/LoginSlice";
+import {Alert} from "react-bootstrap";
+import {userLogin} from "../../api/userApi";
 
-    const onFinishFailed = (errorInfo: any) => {
+
+const LoginForm = () => {
+    const dispatch = useDispatch();
+    const formRef = useRef(null);
+    const {isLoading,error} = useSelector(state => state.login);
+
+    const onFinish = async (values) => {
+        // setSending(true);
+        const data = {
+            "username": values.username,
+            "password": values.password,
+        }
+        try {
+            const response = await userLogin(data);
+            localStorage.setItem("token", response.token);
+            dispatch(loginSuccess());
+        } catch (e) {
+            console.log(e?.data?.error?.message);
+            dispatch(loginFail(e?.data?.error?.message || "Something went wrong"))
+        }
+    }
+
+    const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
 
     return (
         <Fragment>
@@ -27,7 +37,24 @@ const LoginForm = () => {
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
                   ref={formRef}>
+                {
+                  error &&
+                  <Row style={{paddingTop:12, width:'100%'}}>
+                      <Col span={24}>
+                          <Alert variant="danger">{error}</Alert>
+                      </Col>
+                  </Row>
+                }
                 <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
+                            name="username"
+                            label="Username"
+                            rules={[{ required: true, message: '*Username is required' }]}
+                        >
+                            <Input placeholder="Please enter username"/>
+                        </Form.Item>
+                    </Col>
                     <Col span={12}>
                         <Form.Item
                             name="password"
@@ -37,19 +64,10 @@ const LoginForm = () => {
                             <Input placeholder="Please enter email address"/>
                         </Form.Item>
                     </Col>
-                    <Col span={12}>
-                        <Form.Item
-                            name="emailAddress"
-                            label="Email address"
-                            rules={[{ required: true, message: 'Email address is required' }]}
-                        >
-                            <Input placeholder="Please enter email address"/>
-                        </Form.Item>
-                    </Col>
                 </Row>
                 <Row>
-                    <Button type="primary" htmlType="submit"  disabled={sending}>
-                        {sending? 'Please wait ... ': 'Submit'}
+                    <Button type="primary" htmlType="submit"  disabled={isLoading} loading={isLoading}>
+                        {isLoading? 'Please wait ... ': 'Submit'}
                     </Button>
                 </Row>
             </Form>

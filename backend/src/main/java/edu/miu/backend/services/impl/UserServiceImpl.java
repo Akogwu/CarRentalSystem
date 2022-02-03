@@ -1,5 +1,7 @@
 package edu.miu.backend.services.impl;
 
+import edu.miu.backend.dto.UserDTO;
+import edu.miu.backend.exception.CustomException;
 import edu.miu.backend.model.User;
 import edu.miu.backend.repository.UserRepository;
 import edu.miu.backend.services.UserService;
@@ -25,12 +27,36 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepository.findAll();
     }
 
-    public User createUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()) == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
+    public User findById(Long userId) {
+        return userRepository.findById(userId)
+                .orElse(null);
+    }
+
+    public User createUser(User user) throws CustomException {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new CustomException("Username is taken");
         }
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new CustomException("Email already exists");
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
         return user;
+    }
+
+    public User registerUser(UserDTO userDTO) throws CustomException {
+        User user = new User();
+
+        user.setRole(userDTO.getRole());
+        user.setEmail(userDTO.getEmail());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setLastName(userDTO.getLastName());
+        user.setFirstName(userDTO.getFirstName());
+        user.setContactPhoneNumber(userDTO.getContactPhoneNumber());
+        user.setDriverLicenseNumber(userDTO.getDriverLicenseNumber());
+
+        return createUser(user);
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

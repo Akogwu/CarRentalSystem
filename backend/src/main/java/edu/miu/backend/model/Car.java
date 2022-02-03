@@ -22,6 +22,10 @@ public class Car {
 
     @NotNull
     @Column(nullable = false)
+    private Integer rentalFee;
+
+    @NotNull
+    @Column(nullable = false)
     private String year;
 
     @NotNull
@@ -40,6 +44,8 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "brandId", nullable = false)
     private CarBrand brand;
+
+    private Boolean isReserved = false;
 
     @Override
     public String toString() {

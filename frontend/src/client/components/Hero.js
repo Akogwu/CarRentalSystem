@@ -7,7 +7,6 @@ import Form from "./Form";
 const Hero = () => {
     return (
         <HeroSection bg={hero}>
-
             <Form/>
             <img src={car} alt="Car"/>
         </HeroSection>

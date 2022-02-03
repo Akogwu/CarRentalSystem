@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/users",
                 "/payment/**",
                 "/brands",
+                "/cars",
                 "/auth/**",
                 "/users/**",
                 "/swagger-ui/**",
