@@ -31,7 +31,6 @@ const SearchDrawer = ({NavbarRef, closeDrawer, openDrawer, open}) => {
                 {padding:"2rem"}
             }>
 
-
                 <Card sx={{ display: 'flex' }}>
                     <CardMedia
                         component="img"

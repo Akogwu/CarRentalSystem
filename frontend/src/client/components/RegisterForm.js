@@ -1,8 +1,9 @@
 import React, {Fragment, useRef, useState} from 'react';
 import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
-
+import {Alert} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {Button, Col, Form, Input, Row} from "antd";
+import {Button, Col, Form, Input, Row,notification} from "antd";
+
 
 import {userRegistration} from "../../api/userApi";
 import {registrationFail, registrationPending, registrationSuccess} from "../../features/reducers/userSlice";
@@ -11,6 +12,21 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [sending, setSending] = useState(false);
+  const [error,setError] = useState(false);
+  const errorNotification = (message) => {
+    notification["error"]({
+        message:message
+    });
+}
+
+const successNotification = () => {
+        notification["success"]({
+            message:"your reservation was successful",
+            description:"The vehicle will be available for pickup"
+        });
+    }
+
+    const displayError = (message) => <Alert variant="danger">{message}</Alert>
 
   const onFinish = async (values) => {
     setSending(true);
@@ -28,9 +44,12 @@ const LoginForm = () => {
     try {
       await userRegistration(data);
       dispatch(registrationSuccess());
+      formRef.reset();
     } catch (e) {
-      console.log(e);
+      setError(true);
+      displayError(e?.data?.error?.message || "Something went wrong");
       dispatch(registrationFail(e?.data?.error?.message || "Something went wrong"))
+      
     } finally {
       setSending(false);
     }
@@ -142,6 +161,7 @@ const LoginForm = () => {
             {sending ? 'Please wait ... ' : 'Submit'}
           </Button>
         </Row>
+        {error && successNotification()}
       </Form>
     </Fragment>
   );

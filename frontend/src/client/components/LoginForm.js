@@ -60,8 +60,9 @@ const LoginForm = () => {
                             name="password"
                             label="Password"
                             rules={[{ required: true, message: '*Password is required' }]}
+
                         >
-                            <Input placeholder="Please enter email address"/>
+                            <Input.Password placeholder="Please enter email address"/>
                         </Form.Item>
                     </Col>
                 </Row>

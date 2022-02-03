@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservations")
@@ -34,6 +35,10 @@ public class ReservationController {
         );
     }
 
+    @GetMapping
+    public ResponseEntity<List<Reservation>> findReservations() {
+        return ResponseEntity.ok(reservationService.findAllReservations());
+    }
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> findReservationById(
             @PathVariable("reservationId") Long reservationId
