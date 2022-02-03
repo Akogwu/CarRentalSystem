@@ -1,5 +1,5 @@
 ########Maven build stage########
-FROM maven:3.8.2-jdk-11
+FROM maven:3-openjdk-16
 
 WORKDIR /app
 COPY . .

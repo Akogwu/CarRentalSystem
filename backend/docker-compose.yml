@@ -7,7 +7,7 @@ services:
       - MYSQL_DATABASE=rental
       - MYSQL_ROOT_PASSWORD=root
     ports:
-      - '3307:3306'
+      - '3306:3306'
     volumes:
       - rental_db:/var/lib/mysql
   app:
