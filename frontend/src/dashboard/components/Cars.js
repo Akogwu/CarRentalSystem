@@ -64,8 +64,8 @@ const Cars = () => {
         },
         {
             title: 'Brand',
-            dataIndex: 'brand',
-            key: 'brand',
+            dataIndex: 'name',
+            key: 'name',
             sorter:true
         },
         {
@@ -80,8 +80,8 @@ const Cars = () => {
         },
         {
             title: 'Availability',
-            dataIndex: 'status',
-            key: 'status',
+            dataIndex: 'isReserved',
+            key: 'isReserved',
         }
     ];
 

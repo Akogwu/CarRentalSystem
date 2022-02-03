@@ -46,7 +46,7 @@ const Header = () => {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Navbar.Brand href="#home" className="d-flex justify-content-center align-items-center gap-2">
+                                <Navbar.Brand href="/" className="d-flex justify-content-center align-items-center gap-2">
                                     <MdCarRental style={{ fontSize:'2rem' }}/>
                                     <span>
                                         Smart Car<br/>Rentals
@@ -54,7 +54,7 @@ const Header = () => {
                                 </Navbar.Brand>
                             </Nav>
                             <Nav>
-                                <Nav.Link icon={<FaCarAlt/>}>Our fleet</Nav.Link>
+                                <Nav.Link href="#fleetSection" icon={<FaCarAlt/>}>Our fleet</Nav.Link>
                                 
                                 { 
                                 (userId && !isLoggedOut)?  <Nav.Link icon={<FaCarAlt/>} eventKey={2}>

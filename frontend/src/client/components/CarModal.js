@@ -22,14 +22,15 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  })
         })
     },[])
 
-    const successNotification = () => {
-        notification["success"]({
-            message:"your reservation was successful",
-            description:"The vehicle will be available for pickup"
+    const showNotification = (type,title,message) => {
+        notification[type]({
+            message:title,
+            description:message
         });
     }
 
     const onFinish = async (values) => {
+
         const pickupDate = values.reserve_date[0];
         const returnDate = values.reserve_date[1];
         const data = {
@@ -40,8 +41,15 @@ const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  })
         }
         try {
             postApi("/reservations",data).then(response => {
-                successNotification();
-            }).catch( error => console.log(error()))
+                
+                if(response?.response?.status === 400){
+                    showNotification("warning","Attention!",response?.response?.data?.error?.message);
+                }else{
+                    showNotification("success","your reservation was successful","The vehicle will be available for pickup");
+
+                }
+               
+            }).catch( error => console.log(error))
 
         } catch (e) {
             console.log(e);

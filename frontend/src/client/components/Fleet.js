@@ -6,7 +6,7 @@ import CarModal from "./CarModal";
 
 import {notification} from "antd";
 
-const Fleet = ({ img, brand, model, description , carId}) => {
+const Fleet = ({ img, brand, model, description , carId,reserveStatus}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showNotification = (type, title, message) => {
@@ -46,9 +46,12 @@ const Fleet = ({ img, brand, model, description , carId}) => {
                         <li> <GiGymBag/> 3 bag </li>
                         <li> <GiAutoRepair/> automatic </li>
                     </ul>
-                    <button className="select-button" onClick={showModal}>
+                    { (reserveStatus) ? <button  className="reserved-button"  disabled={reserveStatus}>
+                         Reserved
+                    </button>: <button className="select-button" onClick={showModal} disabled={reserveStatus}>
                         Reserve car
-                    </button>
+                    </button> }
+                    
                 </div>
             </div>
             <CarModal description={description} handleCancel={handleCancel} carId={carId} handleOk={handleOk} title={brand+" "+model} img={img} isModalVisible={isModalVisible}/>
@@ -93,6 +96,14 @@ const FleetCard = styled.div`
       }
       
       .select-button{
+        border: 0;
+        outline: none;
+        padding: 0.4rem;
+        color:#fff;
+        background-color: #032a62;
+      }
+
+      .reserved-button{
         border: 0;
         outline: none;
         padding: 0.4rem;
