@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router";
 import Dashboard from "../dashboard/Dashboard";
 import Home from "../client";
 import Cars from "../dashboard/components/Cars";
+import Reservations from '../dashboard/components/Reservations';
 
 const RouteController = () => {
     return (
@@ -11,6 +12,7 @@ const RouteController = () => {
             <Route path="admin">
                 <Route path="dashboard"  element={<Dashboard/>}>
                     <Route path="cars" element={<Cars/>}/>
+                    <Route path="reservations" element={<Reservations/>}/>
                 </Route>
             </Route>
         </Routes>

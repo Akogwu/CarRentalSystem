@@ -24,7 +24,9 @@ const TemplateLayout = ({children}) => {
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="3" >
-                            Requests
+                            <Link to="/admin/dashboard/reservations">
+                                Reservations
+                            </Link>
                         </Menu.Item>
                     </Menu>
                 </Header>
