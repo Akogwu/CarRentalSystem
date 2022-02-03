@@ -25,6 +25,7 @@ const LoginForm = () => {
             const {id,firstName,role} = response.user;
             localStorage.setItem("userId",id);
             localStorage.setItem("firstName",firstName);
+            localStorage.setItem("role",role);
             if(role === "EMPLOYEE") navigate("/admin/dashboard");
             dispatch(loginSuccess());
         } catch (e) {
