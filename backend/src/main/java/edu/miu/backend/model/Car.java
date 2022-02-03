@@ -22,6 +22,10 @@ public class Car {
 
     @NotNull
     @Column(nullable = false)
+    private Integer rentalFee;
+
+    @NotNull
+    @Column(nullable = false)
     private String year;
 
     @NotNull
