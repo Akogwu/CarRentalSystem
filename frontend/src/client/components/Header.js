@@ -1,15 +1,29 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState,useEffect} from 'react';
 import Container from "@mui/material/Container";
 import {Nav, Navbar} from "react-bootstrap";
 import styled from "styled-components";
 import {MdCarRental} from "react-icons/md";
 import RegisterAndLoginDrawer from "./RegisterAndLoginDrawer";
 import {FaCarAlt} from "react-icons/fa";
-
+import {useSelector} from "react-redux";
+import {AiOutlinePoweroff} from "react-icons/ai";
 
 const Header = () => {
     const NavbarRef = useRef(null);
     const [open,setOpen] = useState(false);
+    const [isLoggedOut,setIsLoggedOut] = useState(false);
+
+    const {isAuth} = useSelector(state => state.login);
+
+    const userId = localStorage.getItem('userId');
+    const firstname = localStorage.getItem('firstName');
+
+    useEffect(() => {
+        if(isAuth){
+            setOpen(false);
+            setIsLoggedOut(false);
+        }
+    },[isAuth])
 
     const setOpenDrawer = () => {
       setOpen(true);
@@ -17,6 +31,11 @@ const Header = () => {
 
     const setCloseDrawer = () => {
       setOpen(false);
+    }
+
+    const logout = () =>{
+      localStorage.clear();
+      setIsLoggedOut(true);
     }
 
 
@@ -36,9 +55,16 @@ const Header = () => {
                             </Nav>
                             <Nav>
                                 <Nav.Link icon={<FaCarAlt/>}>Our fleet</Nav.Link>
+                                
+                                { 
+                                (userId && !isLoggedOut)?  <Nav.Link icon={<FaCarAlt/>} eventKey={2}>
+                                {firstname} | <AiOutlinePoweroff title='logout' style={{ fontWeight:"bold"}} onClick={ ()=> logout() }/>
+                            </Nav.Link>:
                                 <Nav.Link icon={<FaCarAlt/>} eventKey={2} onClick={setOpen}>
-                                    Account
+                                Account
                                 </Nav.Link>
+                              }
+                                
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

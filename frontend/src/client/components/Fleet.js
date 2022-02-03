@@ -33,7 +33,7 @@ const Fleet = ({ img, brand, model, description , carId}) => {
                         <li> <GiAutoRepair/> automatic </li>
                     </ul>
                     <button className="select-button" onClick={showModal}>
-                        Select car
+                        Reserve car
                     </button>
                 </div>
             </div>

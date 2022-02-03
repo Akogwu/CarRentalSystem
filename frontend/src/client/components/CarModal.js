@@ -9,13 +9,16 @@ const { RangePicker } = DatePicker;
 
 const CarModal = ({isModalVisible,handleCancel, title,img, description,carId  }) => {
     const [form] = Form.useForm();
+
+    const customerId = localStorage.getItem("userId");
+
     useEffect(()=>{
         console.log(carId);
         form.setFieldsValue({
             "carId":carId,
         })
         form.setFieldsValue({
-            "customerId":13,
+            "customerId":customerId,
         
         })
     },[])

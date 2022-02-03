@@ -59,7 +59,7 @@ public class  SeedData {
         for (int i = 0; i < customers.size(); i++) {
             User user = new User();
             user.setPassword("1234");
-            user.setRole(Role.EMPLOYEE);
+            user.setRole(Role.CUSTOMER);
             user.setDriverLicenseNumber("A2987 B2" + i + 1);
             user.setUsername(customers.get(i).toLowerCase());
             user.setLastName(customers.get(i).toUpperCase());

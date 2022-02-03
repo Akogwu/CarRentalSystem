@@ -4,7 +4,7 @@ axios.interceptors.request.use(function (config) {
         'Access-Control-Allow-Origin': '*',
         'Content-Type':'application/json'
     }
-    if(!config.url.includes("/auth")){
+    if(!config.url.includes("/auth") && !config.url.includes("/brands")  && !config.url.includes("/cars") ){
         config.headers['Authorization'] = `Bearer ${localStorage.getItem("token")}`;
     }
     return config;
