@@ -28,6 +28,14 @@ const Reservations = () => {
     },[]);
 
 
+    const updateReservations = (reservation) => {
+        let newReservations = reservations.filter( r  => r.id !== reservation.id );
+        console.log(newReservations);
+        newReservations.push(reservation);
+        seteservations(newReservations);
+    }
+
+
     const loadReservations = () =>{
         getApi("/reservations")
             .then(response => {
@@ -92,7 +100,7 @@ const Reservations = () => {
             pagination={{ pageSize:50 }}
             rowKey={ (reservation) => reservation.id }
         />
-        <ReservationDetail closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open} reservation={selected}/>
+       {Object.keys(selected).length > 0 && <ReservationDetail  updateReservations={updateReservations} closeDrawer={setCloseDrawer} openDrawer={setOpenDrawer} open={open}  reservation={selected}/>} 
   </Fragment>
   )
   

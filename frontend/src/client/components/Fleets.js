@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from "styled-components";
-import suv from '../assets/suv_santa.png';
 import Fleet from "./Fleet";
 
 const Fleets = ({cars, fetching}) => {
 
+
     return (
-        <FleetSection>
+        <FleetSection id='fleetSection'>
             <div className="content container">
                 <h2 className="text-uppercase text-center">Meet the fleet</h2>
                 <h5 className="text-center text-muted">From SUVs to pickup trucks, wherever you go, we’ve got your ride.</h5>
                 <div className="fleets">
                     {
                        cars.length > 0 && cars.map((car,index) =>
-                            <Fleet key={index} carId={car.carId} img={car.imageCover} brand={car.name} model={car.model} description={car.description} />
+                            <Fleet key={index} carId={car.carId} reserveStatus={car.isReserved} img={car.imageCover} brand={car.name} model={car.model} description={car.description} />
                         )
                     }
                 </div>

@@ -62,12 +62,7 @@ const Form = ({onSearchCars}) => {
 
                             </div>
                         </div>
-                        <div className="search-input">
-                            <div className="group">
-                                <label htmlFor="keyword" className="visually-hidden">Keyword</label>
-                                <input type="search" name="keyword" className="search-keyword" placeholder="What car do you want?"/>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div className="submit-button">
                         <button type="button" onClick={ () => searchCars() }>Search cars</button>
@@ -102,7 +97,7 @@ const FormContainer = styled.div`
           flex-direction: column;
           gap: 0.5rem;
           
-          input{
+          input,select{
             border: 0.5px solid #ddd;
             background-color: #fff;
             padding: 0.5rem;
@@ -122,12 +117,12 @@ const FormContainer = styled.div`
       
       .submit-button{
         button{
-          padding: 2rem;
+          padding: .5rem;
           border: 0;
           outline: none;
-          background-color: #444444;
+          background-color: #032a62;;
           color: #fff;
-          font-size: 1.5rem;
+          font-size: 1rem;
           font-weight: 400;
         }
         

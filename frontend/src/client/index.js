@@ -14,6 +14,8 @@ const Home = () => {
       car => car.brand.name.includes(brandName) && car.model.includes(modelName)
     );
     setFilteredCars(carsFiltered);
+    var scrollDiv = document.getElementById("fleetSection").offsetTop;
+    window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
   }
 
   useEffect(() => {
