@@ -1,5 +1,6 @@
 package edu.miu.backend.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
+@Data
 public class Payment {
     @Id
     @GeneratedValue

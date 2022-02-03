@@ -1,8 +1,8 @@
 spring:
   datasource:
-    password: ${SPRINGDATASOURCEPASSWORD:root}
+    password: ${SPRINGDATASOURCEPASSWORD:1122}
     username: ${SPRINGDATASOURCEUSERNAME:root}
-    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/rental?useSSL=false}
+    url: ${SPRINGDATASOURCEURL:jdbc:mysql://mysqldb:3306/world}
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       maximumPoolSize: 10
