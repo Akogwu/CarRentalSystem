@@ -59,6 +59,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return createUser(user);
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User loggedUser = userRepository.findByUsername(username);
         if (loggedUser == null) {

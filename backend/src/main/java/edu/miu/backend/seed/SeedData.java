@@ -29,6 +29,7 @@ public class  SeedData {
             add("admin");
             add("employee");
         }};
+        int phoneCounter = 1;
 
         employees.forEach(name -> {
             User user = new User();
@@ -37,8 +38,8 @@ public class  SeedData {
             user.setUsername(name.toLowerCase());
             user.setLastName(name.toUpperCase());
             user.setFirstName(name.toUpperCase());
-            user.setContactPhoneNumber("641 816 777" + random.nextInt(10));
             user.setEmail(name.toLowerCase() + "@rental.org");
+            user.setContactPhoneNumber("641 816 777" + name.length());
 
             try {
                 userService.createUser(user);
