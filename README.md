@@ -86,6 +86,21 @@ specific directory you in.
 - **FRONTEND**: Refer to [Frontend README.md](./frontend/README.md) file for more info about frontend.
 - **BACKEND**: Refer to [Backend README.md](./backend/README.md) file for more info about the backend.
 
+#### Screenshots
+
+1. Banner
+![Banner](./car-rental-screenshots/main-page.png?raw=true "Banner screenshot")
+2. Car fleet
+![Car Fleet](./car-rental-screenshots/car-fleet.png?raw=true "Banner screenshot")
+3. Registration Form.
+![Registration Form](./car-rental-screenshots/registration-form.png?raw=true "Registration Form")
+4. Reservation Form.
+![Reservation Form](./car-rental-screenshots/reservation-form.png?raw=true "Registration Form")
+5. Reservation Dashboard.
+![Reservation Dashboard](./car-rental-screenshots/reservations-dashboard.png?raw=true "Reservation Dashboard")
+6. Backend structure.
+![Backend structure](./car-rental-screenshots/backend-structure.png?raw=true "Backend structure")
+
 ---------
 
 #### The team.
